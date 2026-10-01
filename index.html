@@ -84,8 +84,10 @@ section{padding-block:clamp(64px,9vw,104px)}
 .float{position:relative;z-index:2;margin-top:clamp(-110px,-11vw,-80px)}
 .card-live{background:var(--surface);box-shadow:var(--shadow);border-radius:6px;padding:clamp(18px,3vw,28px);display:grid;grid-template-columns:220px 1fr;gap:clamp(20px,3vw,36px);align-items:center;max-width:900px;margin:0 auto}
 .card-live > *{min-width:0}
-.glow{aspect-ratio:16/10;max-width:100%;border-radius:4px;position:relative;overflow:hidden;background:radial-gradient(80% 90% at 50% 0%,#ffcf8a 0%,#ef8a3a 35%,#6a2a12 75%,#2a1208 100%)}
-.glow canvas{position:absolute;inset:0;width:100%;height:100%}
+.glow{max-width:100%;display:grid;place-items:center}
+.emblem{width:100%;height:auto;display:block}
+.emblem-cap{margin:6px 0 0;text-align:center;font:600 italic .98rem/1.35 var(--f-script);color:var(--muted)}
+.emblem-cap b{display:block;font:600 .68rem/1 var(--f-head);font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:6px}
 .card-live h2{font-size:clamp(1.3rem,2.4vw,1.7rem)}
 .times{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 16px;color:var(--muted);font-size:.95rem}
 .times b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
@@ -188,10 +190,9 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;
 footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-transform:uppercase}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
+
 </head>
 <body>
-
-
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
@@ -213,6 +214,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
       <a href="#groups"><span class="en">Cell Groups</span><span class="es">Células</span></a>
       <a href="#events"><span class="en">Events</span><span class="es">Eventos</span></a>
       <a href="#facebook">Facebook</a>
+      <a href="photos.html"><span class="en">Photos</span><span class="es">Fotos</span></a>
       <a href="#contact"><span class="en">Contact</span><span class="es">Contacto</span></a>
     </div>
     <div class="lang" role="group" aria-label="Language">
@@ -228,7 +230,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
   <div class="wrap">
     <span class="eyebrow"><span class="en">Jesus loves you · A growing bilingual church</span><span class="es">Jesús te ama · Una iglesia bilingüe en crecimiento</span></span>
     <h1><span class="en">Welcome To Sandy Apostolic Church</span><span class="es">Bienvenido a Sandy Apostolic Church</span></h1>
-    <p class="lede"><span class="en">Whatever you're carrying, you don't have to carry it alone. We're a Spirit-filled family rooted in the Apostolic faith, and there's a seat saved for you this Sunday.</span><span class="es">Lo que sea que estés cargando, no tienes que cargarlo solo. Somos una familia llena del Espíritu, arraigada en la fe Apostólica, y hay un lugar apartado para ti este domingo.</span></p>
+    <p class="lede"><span class="en">Whatever you're carrying, you don't have to carry it alone. We're a Spirit-filled family rooted in the Apostolic faith, and there's a seat saved for you this Sunday.</span><span class="es">Lo que sea que estés cargando, no tienes que cargarlo solo. Somos una familia llena del Espíritu Santo, arraigada en la fe Apostólica, y hay un lugar apartado para ti este domingo.</span></p>
     <div class="ctas">
       <a class="btn btn-accent" href="#visit"><span class="en">I'm New Here</span><span class="es">Soy nuevo aquí</span></a>
       <a class="btn btn-outline" href="#gospel"><span class="en">God's Plan for You</span><span class="es">El plan de Dios para ti</span></a>
@@ -239,13 +241,33 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
 
 <div class="wrap float" id="visit">
   <div class="card-live">
-    <div class="glow"><canvas id="crowd" aria-hidden="true"></canvas></div>
+    <div class="glow"><svg class="emblem" viewBox="0 30 400 195" role="img" aria-label="A church on a hill, glowing with light">
+  <defs><radialGradient id="cityglow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fbd58a" stop-opacity=".75"/><stop offset=".55" stop-color="#fbd58a" stop-opacity=".22"/><stop offset="1" stop-color="#fbd58a" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="200" cy="105" r="78" fill="url(#cityglow)"/>
+  <ellipse cx="200" cy="214" rx="170" ry="5" fill="#e9e6e1"/>
+  <polygon points="20,205 92,128 150,205" fill="#f6c99a"/>
+  <polygon points="92,128 120,160 108,205 70,205" fill="#f3b47a"/>
+  <polygon points="250,205 318,122 385,205" fill="#f6c99a"/>
+  <polygon points="318,122 346,158 330,205 300,205" fill="#f3b47a"/>
+  <polygon points="48,205 120,150 162,124 200,124 238,124 280,150 352,205" fill="#e8873f"/>
+  <polygon points="162,124 200,124 188,160 140,170" fill="#f2a65a"/>
+  <polygon points="200,124 238,124 262,168 214,162" fill="#d9622b"/>
+  <polygon points="120,150 162,124 140,170 92,184" fill="#ef9a4c"/>
+  <polygon points="238,124 280,150 312,184 262,168" fill="#c2502a"/>
+  <polygon points="140,170 188,160 200,205 120,205" fill="#e07a36"/>
+  <polygon points="188,160 214,162 238,205 200,205" fill="#d4672c"/>
+  <polygon points="214,162 262,168 290,205 238,205" fill="#b8401f"/>
+  <polygon points="92,184 140,170 120,205 60,205" fill="#d9622b"/>
+  <polygon points="262,168 312,184 340,205 290,205" fill="#a8391c"/>
+  <polygon points="188,160 200,124 214,162" fill="#f7c07a"/>
+  <rect x="186" y="102" width="44" height="22" fill="#a8391c"/><polygon points="183,103 208,88 233,103" fill="#6e2812"/><circle cx="208" cy="97" r="2.6" fill="#fde3a7"/><path d="M192 119 V110.5 a2.5 2.5 0 0 1 5 0 V119 z" fill="#fde3a7"/><path d="M205.5 119 V110.5 a2.5 2.5 0 0 1 5 0 V119 z" fill="#fde3a7"/><path d="M219 119 V110.5 a2.5 2.5 0 0 1 5 0 V119 z" fill="#fde3a7"/><rect x="170" y="94" width="18" height="30" fill="#8a3418"/><polygon points="168,95 179,62 190,95" fill="#6e2812"/><polygon points="179,62 190,95 179,95" fill="#5a200e"/><path d="M175.5 107 V102.5 a3.5 3.5 0 0 1 7 0 V107 z" fill="#fde3a7"/><path d="M174.5 124 V116 a4.5 4.5 0 0 1 9 0 V124 z" fill="#fde3a7"/><rect x="164" y="123" width="72" height="2" fill="#6e2812" opacity=".35"/>
+</svg><p class="emblem-cap"><span class="en">“A city that is set on a hill cannot be hid.”</span><span class="es">“Una ciudad asentada sobre un monte no se puede esconder.”</span> <b><span class="en">Matthew 5:14</span><span class="es">Mateo 5:14</span></b></p></div>
     <div>
       <h2><span class="en">Join Us This Sunday</span><span class="es">Acompáñanos este domingo</span></h2>
       <div class="times">
         <span><b>11:00 AM</b> · <span class="en">Sunday School</span><span class="es">Escuela Dominical</span></span>
         <span><b>12:00 PM</b> · <span class="en">General Service</span><span class="es">Servicio General</span></span>
-        <span><b>Mon 7:00 PM</b> · <span class="en">Prayer</span><span class="es">Oración</span></span>
+        <span><b><span class="en">Mon</span><span class="es">Lunes</span> 7:00 PM</b> · <span class="en">Prayer</span><span class="es">Oración</span></span>
       </div>
       <p class="live"><span class="dot" aria-hidden="true"></span><span class="en">Can't make it in person? Watch us on <b>Facebook Live every Sunday at 12 PM</b>.</span><span class="es">¿No puedes venir en persona? Míranos en <b>Facebook Live cada domingo a las 12 PM</b>.</span></p>
       <div class="row">
@@ -305,7 +327,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
         <h2>Pastor Florentino Monreal</h2>
       </div>
       <p><span class="en">Pastor Monreal shepherds Sandy Apostolic Church with faithfulness, prayer and a heart for every family that walks through our doors. We'd love for you to meet him this Sunday.</span><span class="es">El Pastor Monreal pastorea Sandy Apostolic Church con fidelidad, oración y un corazón para cada familia que entra por nuestras puertas. Nos encantaría que lo conozcas este domingo.</span></p>
-      <p style="margin:0"><span class="en">Part of the Apostolic Assembly of the Faith in Christ Jesus.</span><span class="es">Parte de la Asamblea Apostólica de la Fe en Cristo Jesús.</span></p>
+      <p style="margin:0"><span class="en">Part of the Apostolic Assembly of the Faith in Christ Jesus.</span><span class="es">Asamblea Apostólica de la Fe en Cristo Jesús</span></p>
     </div>
   </div>
 </section>
@@ -374,7 +396,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
         <span class="dot" aria-hidden="true"></span>
         <div><b><span class="en">Facebook Live</span><span class="es">Facebook Live</span></b><span><span class="en">Every Sunday · 12:00 PM</span><span class="es">Cada domingo · 12:00 PM</span></span></div>
       </div>
-      <a class="btn btn-accent" href="https://www.facebook.com/florentinomonrea" target="_blank" rel="noopener" style="margin-top:18px"><span class="en">Follow Us on Facebook</span><span class="es">Síguenos en Facebook</span> →</a>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px"><a class="btn btn-accent" href="https://www.facebook.com/florentinomonrea" target="_blank" rel="noopener"><span class="en">Follow Us on Facebook</span><span class="es">Síguenos en Facebook</span> →</a><a class="btn" href="photos.html" style="border-color:var(--line);color:var(--fg)"><span class="en">Browse Photo Albums</span><span class="es">Ver álbumes de fotos</span></a></div>
     </div>
     <div class="fb-frame">
       <iframe title="Sandy Apostolic Church on Facebook" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fflorentinomonrea&tabs=timeline&width=500&height=640&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" width="500" height="640" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
@@ -498,10 +520,6 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
   scene(document.getElementById('stage'),{
     bg:['#1d2c58','#121b3a','#0b1230'], spacing:46, arms:.35, head:9, body:34, dots:60, dot:'#c8d4ff', crowd:'#060a1c',
     beams:[{x:.55,c:'rgba(150,175,255,.22)'},{x:.72,c:'rgba(232,135,63,.16)'},{x:.88,c:'rgba(150,175,255,.18)'},{x:.38,c:'rgba(150,175,255,.10)'}]
-  });
-  scene(document.getElementById('crowd'),{
-    bg:null, spacing:22, arms:.6, head:4.5, body:16, dots:24, dot:'#fff3d6', crowd:'#1a0b05',
-    beams:[{x:.3,c:'rgba(255,240,200,.35)'},{x:.7,c:'rgba(255,240,200,.3)'}]
   });
 })();
 </script>
