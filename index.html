@@ -66,7 +66,20 @@ section{padding-block:clamp(64px,9vw,104px)}
 .lang button{background:none;border:0;color:var(--on-navy-muted);font:600 .76rem/1 var(--f-head);padding:8px 11px;border-radius:3px;cursor:pointer;letter-spacing:.06em}
 .lang button[aria-pressed="true"]{background:var(--accent);color:#fff}
 .nav .btn{padding:11px 18px}
-@media (max-width:920px){.nav-links{display:none}}
+.nav .wrap{position:relative}
+.menu-btn{display:none;width:44px;height:44px;border:1px solid rgba(255,255,255,.25);border-radius:4px;background:none;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0}
+.menu-btn span{display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:transform .2s, opacity .2s}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media (max-width:920px){
+  .menu-btn{display:flex}
+  .nav-links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--navy-2);padding:8px clamp(16px,4vw,40px) 16px;border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 18px 30px -18px rgba(0,0,0,.6)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:14px 0;font-size:1.05rem;border-bottom:1px solid rgba(255,255,255,.08);color:#fff}
+  .nav-links a:last-child{border-bottom:0}
+}
+@media (max-width:420px){.brand b{font-size:.9rem}.brand img{width:26px;height:auto}.nav .wrap{gap:12px}}
 @media (max-width:520px){.nav .btn{display:none}}
 
 /* Hero */
@@ -207,7 +220,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
 <nav class="nav" aria-label="Main">
   <div class="wrap">
     <a class="brand" href="#top"><img src="sac-logo.png" alt="Apostolic Assembly of the Faith in Christ Jesus shield" width="31" height="40"><span><b>Sandy Apostolic Church</b><small>TAYLORSVILLE, UTAH</small></span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="#visit"><span class="en">Visit</span><span class="es">Visítanos</span></a>
       <a href="#ministries"><span class="en">Ministries</span><span class="es">Ministerios</span></a>
       <a href="#gospel"><span class="en">New Life</span><span class="es">Nueva Vida</span></a>
@@ -222,6 +235,14 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
       <button id="lang-es" type="button" aria-pressed="false" data-l="es">ES</button>
     </div>
     <a class="btn btn-accent" href="#contact"><span class="en">Prayer</span><span class="es">Oración</span></a>
+  <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span><span></span><span></span></button>
+    <script>
+    (function(){var b=document.getElementById('menu-btn'),m=document.getElementById('nav-links');
+      function set(o){m.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));}
+      b.addEventListener('click',function(){set(!m.classList.contains('open'));});
+      m.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});})();
+    </script>
   </div>
 </nav>
 
