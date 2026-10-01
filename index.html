@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Sandy Apostolic Church, a growing bilingual (English/Spanish) Apostolic church in Taylorsville, Utah. Sunday School 11 AM, General Service 12 PM, Facebook Live every Sunday at 12 PM.">
+<link rel="icon" href="sac-logo.png">
+<title>Sandy Apostolic Church</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,600&display=swap">
+<style>
+/* Layout: navy worship-night hero (left-aligned) → floating white service card overlapping it → icon grid → navy gospel band → photo-style event cards → contact. */
+:root{
+  --bg:#ffffff; --bg-2:#f4f5f9; --surface:#ffffff; --fg:#1b2238; --muted:#626a7e; --line:#e4e6ee;
+  --accent:#e8873f; --accent-hover:#d77630; --accent-soft:#fdeee2;
+  --navy:#16213f; --navy-2:#0d1530; --on-navy:#ffffff; --on-navy-muted:#b8bfd3;
+  --shadow:0 24px 60px -24px rgba(16,24,52,.35);
+  --f-head:"Jost", "Century Gothic", "Avenir Next", system-ui, sans-serif;
+  --f-body:"Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-script:"Cormorant Garamond", Georgia, serif;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+[id]{scroll-margin-top:80px}
+body{background:var(--bg);color:var(--fg);font:400 1.02rem/1.65 var(--f-body);margin:0}
+a{color:var(--accent)}
+.es{display:none}
+:root[data-lang="es"] .es{display:revert}
+:root[data-lang="es"] .en{display:none}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--f-head);text-wrap:balance;margin:0}
+h2{font-weight:600;font-size:clamp(1.8rem,3.6vw,2.5rem);line-height:1.15}
+h3{font-weight:600;font-size:1.1rem;line-height:1.3}
+.eyebrow{font:600 .74rem/1 var(--f-head);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+section{padding-block:clamp(64px,9vw,104px)}
+.sec-head{display:grid;gap:12px;max-width:620px;margin-bottom:40px}
+.sec-head.center{margin-inline:auto;text-align:center;justify-items:center}
+.sec-head p{margin:0;color:var(--muted)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:4px;font:600 .92rem/1 var(--f-head);text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:background .15s, transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:var(--accent-hover)}
+.btn-outline{border-color:rgba(255,255,255,.45);color:#fff;background:transparent}
+.btn-outline:hover{background:rgba(255,255,255,.08)}
+.link{font:600 .92rem/1 var(--f-head);color:var(--fg);text-decoration:none}
+.link:hover{color:var(--accent)}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(13,21,48,.92);backdrop-filter:blur(10px)}
+.nav .wrap{display:flex;align-items:center;gap:22px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;margin-right:auto}
+.brand svg{flex:none}
+.brand b{font:600 1.02rem/1.1 var(--f-head);letter-spacing:.06em;text-transform:uppercase}
+.brand small{display:block;font-size:.62rem;letter-spacing:.14em;color:var(--on-navy-muted);font-weight:500}
+.nav-links{display:flex;gap:24px}
+.nav-links a{color:var(--on-navy-muted);text-decoration:none;font:500 .9rem/1 var(--f-head)}
+.nav-links a:hover{color:#fff}
+.lang{display:flex;border:1px solid rgba(255,255,255,.25);border-radius:4px;padding:3px}
+.lang button{background:none;border:0;color:var(--on-navy-muted);font:600 .76rem/1 var(--f-head);padding:8px 11px;border-radius:3px;cursor:pointer;letter-spacing:.06em}
+.lang button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.nav .btn{padding:11px 18px}
+@media (max-width:920px){.nav-links{display:none}}
+@media (max-width:520px){.nav .btn{display:none}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:var(--navy-2);color:#fff;padding-block:clamp(80px,12vw,150px) clamp(130px,16vw,190px)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,21,48,.92) 0%,rgba(13,21,48,.6) 55%,rgba(13,21,48,.35) 100%)}
+.hero .wrap{position:relative;z-index:1;display:grid;gap:22px;justify-items:start}
+.hero .eyebrow{color:#fff;letter-spacing:.2em}
+.hero h1{font-weight:600;font-size:clamp(2.6rem,6.6vw,4.6rem);line-height:1.08;max-width:12ch}
+.hero .lede{max-width:52ch;color:var(--on-navy-muted);margin:0}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.hero .script{font:600 italic 1.5rem/1 var(--f-script);color:var(--accent)}
+
+/* Floating service card */
+.float{position:relative;z-index:2;margin-top:clamp(-110px,-11vw,-80px)}
+.card-live{background:var(--surface);box-shadow:var(--shadow);border-radius:6px;padding:clamp(18px,3vw,28px);display:grid;grid-template-columns:220px 1fr;gap:clamp(20px,3vw,36px);align-items:center;max-width:900px;margin:0 auto}
+.card-live > *{min-width:0}
+.glow{aspect-ratio:16/10;max-width:100%;border-radius:4px;position:relative;overflow:hidden;background:radial-gradient(80% 90% at 50% 0%,#ffcf8a 0%,#ef8a3a 35%,#6a2a12 75%,#2a1208 100%)}
+.glow canvas{position:absolute;inset:0;width:100%;height:100%}
+.card-live h2{font-size:clamp(1.3rem,2.4vw,1.7rem)}
+.times{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0 16px;color:var(--muted);font-size:.95rem}
+.times b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+.live{display:flex;gap:10px;align-items:center;margin:0 0 16px;font-size:.95rem;color:var(--muted)}
+.live b{color:var(--fg);font-weight:600}
+.dot{flex:none;width:9px;height:9px;border-radius:50%;background:#e0352b;box-shadow:0 0 0 4px rgba(224,53,43,.18)}
+.card-live .row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+@media (max-width:640px){.card-live{grid-template-columns:1fr}}
+
+/* Serving / ministries */
+.serve{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(32px,6vw,80px);align-items:start}
+.serve > *{min-width:0}
+.serve .intro p{color:var(--muted)}
+.icons{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px}
+.ic{display:grid;gap:10px;align-content:start;min-width:0}
+.ic .box{width:44px;height:44px;border:1.5px solid var(--line);border-radius:6px;display:grid;place-items:center;color:var(--fg)}
+.ic:hover .box{border-color:var(--accent);color:var(--accent)}
+.ic p{margin:0;color:var(--muted);font-size:.93rem;line-height:1.55}
+@media (max-width:860px){.serve{grid-template-columns:1fr}}
+@media (max-width:560px){.icons{grid-template-columns:repeat(2,1fr)}}
+
+/* Gospel */
+.gospel{background:var(--bg-2);color:var(--fg)}
+.gospel .sec-head p{color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.step{background:var(--surface);box-shadow:0 14px 40px -24px rgba(16,24,52,.28);border-radius:6px;padding:30px 26px;display:grid;gap:12px;align-content:start;min-width:0}
+.step .num{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font:600 1.05rem/1 var(--f-head)}
+.step p{margin:0;color:var(--muted)}
+.step .ref{font:600 .72rem/1 var(--f-head);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.acts{margin-top:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding-top:32px;border-top:1px solid var(--line)}
+.acts blockquote{margin:0;font:600 italic clamp(1.25rem,2.4vw,1.6rem)/1.35 var(--f-script);color:var(--navy)}
+.acts cite{display:block;font:600 .72rem/1 var(--f-head);font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:12px}
+@media (max-width:820px){.steps{grid-template-columns:1fr}.acts{grid-template-columns:1fr}}
+
+/* Pastor */
+.soft{background:var(--bg-2)}
+.pastor{display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,5vw,60px);align-items:center;max-width:900px;margin:0 auto}
+.pastor > div{min-width:0}
+.crest{width:clamp(140px,18vw,190px);height:auto;max-width:100%}
+.monogram{width:clamp(150px,20vw,210px);aspect-ratio:1;max-width:100%;border-radius:50%;background:linear-gradient(145deg,#24315a,var(--navy-2));display:grid;place-items:center;color:#fff;font:600 clamp(2.6rem,5vw,3.6rem)/1 var(--f-head);letter-spacing:.04em;box-shadow:0 0 0 6px var(--accent-soft)}
+.pastor p{color:var(--muted)}
+@media (max-width:640px){.pastor{grid-template-columns:1fr}}
+
+/* Cell groups */
+.groups{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.group{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;min-width:0}
+.group > div{min-width:0;display:grid;gap:6px}
+.group .box{width:44px;height:44px;border-radius:6px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.group .when{font:600 .78rem/1.3 var(--f-head);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.group address{font-style:normal;color:var(--muted);font-size:.95rem}
+.group a{font:600 .88rem/1 var(--f-head);text-decoration:none}
+@media (max-width:720px){.groups{grid-template-columns:1fr}}
+
+/* Events */
+.events{display:grid;grid-template-columns:repeat(2,1fr);gap:32px 28px;max-width:900px;margin:0 auto}
+.ev{display:grid;gap:14px;align-content:start;min-width:0}
+.ev .img{aspect-ratio:4/3;max-width:100%;border-radius:4px;position:relative;overflow:hidden;display:grid;place-items:center}
+.ev .img span{position:relative;color:#fff;text-align:center;font:600 3.4rem/1 var(--f-head);font-variant-numeric:tabular-nums}
+.ev .img small{display:block;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.ev .img.a{background:radial-gradient(90% 90% at 30% 20%,#3d5a8a,#16213f)}
+.ev .img.b{background:radial-gradient(90% 90% at 70% 20%,#f2e7d6,#c9b08d 60%,#8a7254)}
+.ev .img.d{background:radial-gradient(90% 90% at 50% 100%,#ffd3a8,#e6a1a8 45%,#5b4a7a 100%)}
+.ev .img.c{background:radial-gradient(90% 90% at 50% 10%,#f0a868,#b0532a 60%,#4a1f12)}
+.ev .meta{font:600 .72rem/1 var(--f-head);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.ev p{margin:0;color:var(--muted);font-size:.95rem}
+@media (max-width:560px){.events{grid-template-columns:1fr}}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px)}
+.contact-grid > *{min-width:0}
+.info div{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;padding:16px 0;border-top:1px solid var(--line)}
+.info div:last-child{border-bottom:1px solid var(--line)}
+.info .k{font:600 .72rem/1 var(--f-head);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.info .v{font-weight:500;word-break:break-word;color:var(--fg);text-decoration:none}
+.info a.v:hover{color:var(--accent);text-decoration:underline}
+.copy{background:none;border:1px solid var(--line);color:var(--fg);border-radius:4px;font:600 .74rem/1 var(--f-head);padding:8px 11px;cursor:pointer}
+.copy:hover{border-color:var(--accent);color:var(--accent)}
+.prayer{background:var(--surface);box-shadow:var(--shadow);border-radius:6px;padding:clamp(20px,3vw,32px);display:grid;gap:14px}
+.prayer label{font-weight:600;font-size:.9rem}
+.prayer .row{display:grid;gap:6px}
+.prayer input,.prayer textarea{width:100%;font:inherit;color:var(--fg);background:var(--bg-2);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+.prayer textarea{min-height:120px;resize:vertical}
+.prayer .hint{font-size:.88rem;color:var(--muted);margin:0}
+.status{font-size:.9rem;color:var(--accent);font-weight:600;min-height:1.2em;margin:0}
+@media (max-width:820px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:480px){.info div{grid-template-columns:1fr;gap:6px}}
+
+footer{background:var(--navy-2);color:var(--on-navy-muted);padding-block:40px;font-size:.9rem}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-transform:uppercase}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21c3.9 0 6-2.6 6-6 0-4-3.5-6-4-10-2.5 1.5-4 4-4 6.5C9 10.5 8 10 7.5 9 6.6 10.4 6 12 6 14.5 6 18.4 8.6 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3zm11-2a3 3 0 1 1-3-3 3 3 0 0 1 3 3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-hands" viewBox="0 0 24 24"><path d="M12 21V11m0 0L8.5 4.5a1.5 1.5 0 0 0-2.6 1.4L8 10M12 11l3.5-6.5a1.5 1.5 0 0 1 2.6 1.4L16 10M5 13l3 8M19 13l-3 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24"><path d="M12 3v18M7 8h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="sac-logo.png" alt="Apostolic Assembly of the Faith in Christ Jesus shield" width="31" height="40"><span><b>Sandy Apostolic Church</b><small>TAYLORSVILLE, UTAH</small></span></a>
+    <div class="nav-links">
+      <a href="#visit"><span class="en">Visit</span><span class="es">Visítanos</span></a>
+      <a href="#ministries"><span class="en">Ministries</span><span class="es">Ministerios</span></a>
+      <a href="#gospel"><span class="en">New Life</span><span class="es">Nueva Vida</span></a>
+      <a href="#groups"><span class="en">Cell Groups</span><span class="es">Células</span></a>
+      <a href="#events"><span class="en">Events</span><span class="es">Eventos</span></a>
+      <a href="#contact"><span class="en">Contact</span><span class="es">Contacto</span></a>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="lang-en" type="button" aria-pressed="true" data-l="en">EN</button>
+      <button id="lang-es" type="button" aria-pressed="false" data-l="es">ES</button>
+    </div>
+    <a class="btn btn-accent" href="#contact"><span class="en">Prayer</span><span class="es">Oración</span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="eyebrow"><span class="en">Jesus loves you · A growing bilingual church</span><span class="es">Jesús te ama · Una iglesia bilingüe en crecimiento</span></span>
+    <h1><span class="en">Welcome To Sandy Apostolic Church</span><span class="es">Bienvenido a Sandy Apostolic Church</span></h1>
+    <p class="lede"><span class="en">Whatever you're carrying, you don't have to carry it alone. We're a Spirit-filled family rooted in the Apostolic faith, and there's a seat saved for you this Sunday.</span><span class="es">Lo que sea que estés cargando, no tienes que cargarlo solo. Somos una familia llena del Espíritu, arraigada en la fe Apostólica, y hay un lugar apartado para ti este domingo.</span></p>
+    <div class="ctas">
+      <a class="btn btn-accent" href="#visit"><span class="en">I'm New Here</span><span class="es">Soy nuevo aquí</span></a>
+      <a class="btn btn-outline" href="#gospel"><span class="en">God's Plan for You</span><span class="es">El plan de Dios para ti</span></a>
+      <a class="btn btn-outline" href="https://www.facebook.com/share/198dVT4Psj/" target="_blank" rel="noopener"><span class="dot" aria-hidden="true"></span><span class="en">Facebook Live · Sun 12 PM</span><span class="es">Facebook Live · Dom 12 PM</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap float" id="visit">
+  <div class="card-live">
+    <div class="glow"><canvas id="crowd" aria-hidden="true"></canvas></div>
+    <div>
+      <h2><span class="en">Join Us This Sunday</span><span class="es">Acompáñanos este domingo</span></h2>
+      <div class="times">
+        <span><b>11:00 AM</b> · <span class="en">Sunday School</span><span class="es">Escuela Dominical</span></span>
+        <span><b>12:00 PM</b> · <span class="en">General Service</span><span class="es">Servicio General</span></span>
+        <span><b>Mon 7:00 PM</b> · <span class="en">Prayer</span><span class="es">Oración</span></span>
+      </div>
+      <p class="live"><span class="dot" aria-hidden="true"></span><span class="en">Can't make it in person? Watch us on <b>Facebook Live every Sunday at 12 PM</b>.</span><span class="es">¿No puedes venir en persona? Míranos en <b>Facebook Live cada domingo a las 12 PM</b>.</span></p>
+      <div class="row">
+        <a class="btn btn-accent" href="https://www.google.com/maps/dir/?api=1&destination=3898+W+5535+S+Suite+4+Taylorsville+UT+84129" target="_blank" rel="noopener"><span class="en">Get Directions</span><span class="es">Cómo llegar</span> →</a>
+        <a class="link" href="https://www.facebook.com/share/198dVT4Psj/" target="_blank" rel="noopener"><span class="en">Watch on Facebook Live</span><span class="es">Ver en Facebook Live</span> →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="ministries">
+  <div class="wrap serve">
+    <div class="intro">
+      <div class="sec-head" style="margin-bottom:18px">
+        <span class="eyebrow"><span class="en">Our ministries</span><span class="es">Nuestros ministerios</span></span>
+        <h2><span class="en">There's a Place for You Here</span><span class="es">Aquí hay un lugar para ti</span></h2>
+      </div>
+      <p><span class="en">We're a bilingual church, with worship in English and Spanish. Come as you are. No one expects you to have it all together. Someone will greet you at the door and help you find a seat.</span><span class="es">Somos una iglesia bilingüe, con adoración en inglés y español. Ven tal como eres. Nadie espera que lo tengas todo resuelto. Alguien te recibirá en la puerta y te ayudará a encontrar un lugar.</span></p>
+      <a class="btn btn-accent" href="#contact" style="margin-top:10px"><span class="en">Get Connected</span><span class="es">Conéctate</span></a>
+    </div>
+    <div class="icons">
+      <div class="ic"><span class="box"><svg width="20" height="20"><use href="#i-cross"/></svg></span><h3><span class="en">Sunday Worship</span><span class="es">Culto Dominical</span></h3><p><span class="en">Praise, prayer and the Word every Sunday at 12 PM.</span><span class="es">Alabanza, oración y la Palabra cada domingo a las 12 PM.</span></p></div>
+      <div class="ic"><span class="box"><svg width="20" height="20"><use href="#i-book"/></svg></span><h3><span class="en">Sunday School</span><span class="es">Escuela Dominical</span></h3><p><span class="en">Growing in the Word together, Sundays at 11 AM.</span><span class="es">Creciendo juntos en la Palabra, domingos a las 11 AM.</span></p></div>
+      <div class="ic"><span class="box"><svg width="20" height="20"><use href="#i-flame"/></svg></span><h3><span class="en">Youth</span><span class="es">Jóvenes</span></h3><p><span class="en">A generation on fire for Jesus.</span><span class="es">Una generación encendida por Jesús.</span></p></div>
+      <div class="ic"><span class="box"><svg width="20" height="20"><use href="#i-heart"/></svg></span><h3>Dorcas</h3><p><span class="en">Women serving, encouraging and caring for one another.</span><span class="es">Damas sirviendo, animando y cuidándose unas a otras.</span></p></div>
+      <div class="ic"><span class="box"><svg width="20" height="20"><use href="#i-shield"/></svg></span><h3>Varones</h3><p><span class="en">Men who pray, serve and lead with strength.</span><span class="es">Hermanos que oran, sirven y dirigen con fortaleza.</span></p></div>
+      <div class="ic"><span class="box"><svg width="20" height="20"><use href="#i-music"/></svg></span><h3><span class="en">Praise Team</span><span class="es">Alabanza</span></h3><p><span class="en">Leading the church into worship every week.</span><span class="es">Guiando a la iglesia en adoración cada semana.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="gospel" id="gospel">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow"><span class="en">The way to new life</span><span class="es">El camino a una nueva vida</span></span>
+      <h2><span class="en">God Has a Plan for Your Life</span><span class="es">Dios tiene un plan para tu vida</span></h2>
+      <p><span class="en">All of us have sinned and fallen short (Romans 3:23). But God loved the world so much that He gave His only Son, so whoever believes in Him will not perish but have everlasting life (John 3:16).</span><span class="es">Todos hemos pecado y estamos destituidos de la gloria de Dios (Romanos 3:23). Pero de tal manera amó Dios al mundo que dio a su Hijo unigénito, para que todo aquel que en Él cree no se pierda, mas tenga vida eterna (Juan 3:16).</span></p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="num">1</span><h3><span class="en">Repent</span><span class="es">Arrepiéntete</span></h3><p><span class="en">Turn from sin and turn toward God with your whole heart. He is faithful to forgive.</span><span class="es">Apártate del pecado y vuélvete a Dios de todo corazón. Él es fiel para perdonar.</span></p><span class="ref">1 John 1:9</span></div>
+      <div class="step"><span class="num">2</span><h3><span class="en">Be Baptized in Jesus' Name</span><span class="es">Bautízate en el nombre de Jesús</span></h3><p><span class="en">Baptism by immersion in the name of Jesus Christ for the remission of your sins.</span><span class="es">Bautismo por inmersión en el nombre de Jesucristo para perdón de los pecados.</span></p><span class="ref">Acts 4:12 · 8:16</span></div>
+      <div class="step"><span class="num">3</span><h3><span class="en">Receive the Holy Ghost</span><span class="es">Recibe el Espíritu Santo</span></h3><p><span class="en">God's promise is for you, your children, and everyone He is calling. He fills us with His Spirit and power to live new.</span><span class="es">La promesa de Dios es para ti, tus hijos y todos los que Él llame. Nos llena de su Espíritu y poder para vivir una vida nueva.</span></p><span class="ref">Acts 2:39</span></div>
+    </div>
+    <div class="acts">
+      <blockquote><span class="en">“Repent, and be baptized every one of you in the name of Jesus Christ for the remission of sins, and ye shall receive the gift of the Holy Ghost.”</span><span class="es">“Arrepentíos, y bautícese cada uno de vosotros en el nombre de Jesucristo para perdón de los pecados; y recibiréis el don del Espíritu Santo.”</span><cite>Acts 2:38</cite></blockquote>
+      <a class="btn btn-accent" href="#contact"><span class="en">I Want to Talk to Someone</span><span class="es">Quiero hablar con alguien</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="pastor">
+  <div class="wrap pastor">
+    <img class="crest" src="sac-logo.png" alt="Apostolic Assembly of the Faith in Christ Jesus shield" width="308" height="400">
+    <div>
+      <div class="sec-head" style="margin-bottom:14px">
+        <span class="eyebrow"><span class="en">Our pastor</span><span class="es">Nuestro pastor</span></span>
+        <h2>Pastor Florentino Monreal</h2>
+      </div>
+      <p><span class="en">Pastor Monreal shepherds Sandy Apostolic Church with faithfulness, prayer and a heart for every family that walks through our doors. We'd love for you to meet him this Sunday.</span><span class="es">El Pastor Monreal pastorea Sandy Apostolic Church con fidelidad, oración y un corazón para cada familia que entra por nuestras puertas. Nos encantaría que lo conozcas este domingo.</span></p>
+      <p style="margin:0"><span class="en">Part of the Apostolic Assembly of the Faith in Christ Jesus.</span><span class="es">Parte de la Asamblea Apostólica de la Fe en Cristo Jesús.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="groups">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow"><span class="en">During the week</span><span class="es">Entre semana</span></span>
+      <h2><span class="en">Cell Groups Near You</span><span class="es">Grupos de célula cerca de ti</span></h2>
+      <p><span class="en">Church happens in homes too. Join a small group for prayer, the Word, and real friendship across the Salt Lake Valley.</span><span class="es">La iglesia también se vive en los hogares. Únete a un grupo para orar, estudiar la Palabra y crear amistades por todo el Valle de Salt Lake.</span></p>
+    </div>
+    <div class="groups">
+      <article class="group"><span class="box"><svg width="20" height="20"><use href="#i-home"/></svg></span><div><span class="when"><span class="en">Thursdays</span><span class="es">Jueves</span> · 7:00–8:30 PM</span><h3>Kearns</h3><address>4555 W 5570 S, Kearns, UT 84118</address><a href="https://www.google.com/maps/dir/?api=1&destination=4555+W+5570+S+Kearns+UT+84118" target="_blank" rel="noopener"><span class="en">Directions</span><span class="es">Cómo llegar</span> →</a></div></article>
+      <article class="group"><span class="box"><svg width="20" height="20"><use href="#i-home"/></svg></span><div><span class="when"><span class="en">Thursdays</span><span class="es">Jueves</span> · 7:00–8:30 PM</span><h3>West Jordan</h3><address>8134 Summit Valley Dr, West Jordan, UT 84088</address><a href="https://www.google.com/maps/dir/?api=1&destination=8134+Summit+Valley+Dr+West+Jordan+UT+84088" target="_blank" rel="noopener"><span class="en">Directions</span><span class="es">Cómo llegar</span> →</a></div></article>
+      <article class="group"><span class="box"><svg width="20" height="20"><use href="#i-home"/></svg></span><div><span class="when"><span class="en">Thursdays</span><span class="es">Jueves</span> · 7:00–8:30 PM</span><h3>Bluffdale</h3><address>3088 Vera Ln, Bluffdale, UT 84065</address><a href="https://www.google.com/maps/dir/?api=1&destination=3088+Vera+Ln+Bluffdale+UT+84065" target="_blank" rel="noopener"><span class="en">Directions</span><span class="es">Cómo llegar</span> →</a></div></article>
+      <article class="group"><span class="box"><svg width="20" height="20"><use href="#i-home"/></svg></span><div><span class="when"><span class="en">Tuesdays</span><span class="es">Martes</span> · 7:00–8:30 PM</span><h3>West Valley</h3><address>4138 S 6000 W, West Valley City, UT 84128</address><a href="https://www.google.com/maps/dir/?api=1&destination=4138+S+6000+W+West+Valley+City+UT+84128" target="_blank" rel="noopener"><span class="en">Directions</span><span class="es">Cómo llegar</span> →</a></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow"><span class="en">Coming up</span><span class="es">Próximamente</span></span>
+      <h2><span class="en">Upcoming Events</span><span class="es">Próximos eventos</span></h2>
+    </div>
+    <div class="events">
+      <article class="ev">
+        <div class="img d"><span><small>Oct</small>4</span></div>
+        <span class="meta"><span class="en">Saturday · 6:00 AM</span><span class="es">Sábado · 6:00 AM</span></span>
+        <h3><span class="en">Early Morning Service for Ladies &amp; Daughters</span><span class="es">Servicio de madrugada para damas e hijas</span></h3>
+        <p><span class="en">Ladies and their daughters, start the day in God's presence with prayer and worship at our church.</span><span class="es">Damas y sus hijas, comiencen el día en la presencia de Dios con oración y adoración en nuestra iglesia.</span></p>
+      </article>
+      <article class="ev">
+        <div class="img a"><span><small>Oct</small>17</span></div>
+        <span class="meta"><span class="en">Outreach · Prayer at 9:00 AM</span><span class="es">Alcance · Oración a las 9:00 AM</span></span>
+        <h3><span class="en">Homeless Outreach</span><span class="es">Alcance a personas sin hogar</span></h3>
+        <p><span class="en">We meet at our church at 9 AM for prayer, then head to 437 W 200 S, Salt Lake City, UT 84101 to share backpacks with essentials and food with our neighbors experiencing homelessness. Come serve with us.</span><span class="es">Nos reunimos en nuestra iglesia a las 9 AM para orar y luego vamos a 437 W 200 S, Salt Lake City, UT 84101 a compartir mochilas con artículos esenciales y comida con nuestros vecinos sin hogar. Ven a servir con nosotros.</span></p>
+        <a class="link" href="https://www.google.com/maps/dir/?api=1&destination=437+W+200+S+Salt+Lake+City+UT+84101" target="_blank" rel="noopener" style="color:var(--accent)"><span class="en">Directions to outreach site</span><span class="es">Cómo llegar al lugar del alcance</span> →</a>
+      </article>
+      <article class="ev">
+        <div class="img b"><span><small>Oct</small>25</span></div>
+        <span class="meta"><span class="en">Special Service · 12:00 PM</span><span class="es">Servicio especial · 12:00 PM</span></span>
+        <h3>Perlas Preciosas</h3>
+        <p><span class="en">A special service honoring the precious pearls of our church, our beloved older sisters.</span><span class="es">Un servicio especial en honor a las perlas preciosas de nuestra iglesia, nuestras amadas hermanas mayores.</span></p>
+      </article>
+      <article class="ev">
+        <div class="img c"><span><small><span class="en">Every</span><span class="es">Cada</span></small><span class="en">MON</span><span class="es">LUN</span></span></div>
+        <span class="meta"><span class="en">Weekly · 7:00 PM</span><span class="es">Semanal · 7:00 PM</span></span>
+        <h3><span class="en">Monday Prayer Night</span><span class="es">Noche de Oración</span></h3>
+        <p><span class="en">Bring your burdens and your praise. We pray for every need together.</span><span class="es">Trae tus cargas y tu alabanza. Oramos juntos por cada necesidad.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="sec-head">
+        <span class="eyebrow"><span class="en">We're here for you</span><span class="es">Estamos para ti</span></span>
+        <h2><span class="en">Let Us Pray With You</span><span class="es">Permítenos orar contigo</span></h2>
+        <p><span class="en">Need prayer, want to be baptized, or have a question? Reach out. Someone from our church will get back to you.</span><span class="es">¿Necesitas oración, quieres bautizarte o tienes una pregunta? Escríbenos. Alguien de nuestra iglesia se comunicará contigo.</span></p>
+      </div>
+      <div class="info">
+        <div><span class="k"><span class="en">Phone</span><span class="es">Teléfono</span></span><a class="v" id="v-phone" href="tel:+18018099856">(801) 809-9856</a></div>
+        <div><span class="k">Email</span><a class="v" id="v-email" href="mailto:sandyapostolicchurch@gmail.com">sandyapostolicchurch@gmail.com</a></div>
+        <div><span class="k"><span class="en">Address</span><span class="es">Dirección</span></span><a class="v" id="v-addr" href="https://www.google.com/maps/dir/?api=1&destination=3898+W+5535+S+Suite+4+Taylorsville+UT+84129" target="_blank" rel="noopener">3898 W 5535 S, Suite 4, Taylorsville, UT 84129</a></div>
+        <div><span class="k">Facebook</span><a class="v" href="https://www.facebook.com/share/198dVT4Psj/" target="_blank" rel="noopener" style="color:var(--accent)">Sandy Apostolic Church</a></div>
+      </div>
+    </div>
+    <form class="prayer" id="prayer-form" name="prayer-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="prayer-request">
+      <p hidden><label>Leave this empty <input name="bot-field"></label></p>
+      <h3><span class="en">Prayer Request</span><span class="es">Petición de oración</span></h3>
+      <div class="row"><label for="p-name"><span class="en">Your name (optional)</span><span class="es">Tu nombre (opcional)</span></label><input id="p-name" name="name" type="text" autocomplete="name"></div>
+      <div class="row"><label for="p-contact"><span class="en">Phone or email (optional, if you'd like us to reach out)</span><span class="es">Teléfono o correo (opcional, si deseas que te contactemos)</span></label><input id="p-contact" name="contact" type="text" autocomplete="email"></div>
+      <div class="row"><label for="p-msg"><span class="en">How can we pray for you?</span><span class="es">¿Cómo podemos orar por ti?</span></label><textarea id="p-msg" name="request" required></textarea></div>
+      <button class="btn btn-accent" type="submit" style="justify-self:start"><span class="en">Send Prayer Request</span><span class="es">Enviar petición de oración</span></button>
+      <p class="status" id="p-status" role="status"></p>
+      <p class="hint"><span class="en">Your request goes privately to our church's prayer team.</span><span class="es">Tu petición llega de forma privada al equipo de oración de nuestra iglesia.</span></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;gap:14px;align-items:center"><img src="sac-logo.png" alt="" width="40" height="52" style="background:#fff;border-radius:6px;padding:4px"><div><b>Sandy Apostolic Church</b><br><span class="en">Apostolic Assembly of the Faith in Christ Jesus</span><span class="es">Asamblea Apostólica de la Fe en Cristo Jesús</span></div></div>
+    <div>3898 W 5535 S, Suite 4 · Taylorsville, UT 84129 · <a href="https://www.facebook.com/share/198dVT4Psj/" target="_blank" rel="noopener">Facebook</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const root=document.documentElement;
+  function setLang(l){
+    root.dataset.lang=l;
+    document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.l===l)));
+    try{localStorage.setItem('sac-lang',l)}catch(e){}
+  }
+  let saved=null; try{saved=localStorage.getItem('sac-lang')}catch(e){}
+  setLang(saved==='es'?'es':'en');
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.l)));
+
+  const t=(en,es)=>root.dataset.lang==='es'?es:en;
+  async function copyText(text, el){
+    try{ await navigator.clipboard.writeText(text); return true; }
+    catch(e){ if(el){ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r);} return false; }
+  }
+  document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click',async()=>{
+    const el=document.getElementById(btn.dataset.copy);
+    const ok=await copyText(el.textContent.trim(), el);
+    const old=btn.innerHTML;
+    btn.textContent=ok?t('Copied','Copiado'):t('Selected','Seleccionado');
+    setTimeout(()=>btn.innerHTML=old,1600);
+  }));
+  const form=document.getElementById('prayer-form'), status=document.getElementById('p-status');
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const msg=document.getElementById('p-msg');
+    if(!msg.value.trim()){ status.textContent=t('Please write your prayer request first.','Por favor escribe tu petición primero.'); msg.focus(); return; }
+    const btn=form.querySelector('button[type="submit"]'); btn.disabled=true;
+    status.textContent=t('Sending…','Enviando…');
+    try{
+      const res=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
+      if(!res.ok) throw new Error(res.status);
+      form.reset();
+      status.textContent=t('Thank you. We received your request and we are praying for you.','Gracias. Recibimos tu petición y estamos orando por ti.');
+    }catch(err){
+      status.textContent=t('We could not send your request right now. Please email it to sandyapostolicchurch@gmail.com or call (801) 809-9856.','No pudimos enviar tu petición en este momento. Envíala a sandyapostolicchurch@gmail.com o llama al (801) 809-9856.');
+    }finally{ btn.disabled=false; }
+  });
+
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Worship-night stage: light beams, haze and a crowd of raised hands
+  function scene(canvas, opts){
+    const ctx=canvas.getContext('2d'); let w,h,dpr,people=[],dots=[];
+    function size(){
+      dpr=Math.min(devicePixelRatio||1,2); w=canvas.clientWidth; h=canvas.clientHeight;
+      canvas.width=w*dpr; canvas.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+      people=[]; const n=Math.ceil(w/opts.spacing)+2;
+      for(let i=0;i<n;i++) people.push({x:i*opts.spacing+Math.random()*10-20, s:.7+Math.random()*.5, arm:Math.random()<opts.arms, ph:Math.random()*6});
+      dots=Array.from({length:opts.dots},()=>({x:Math.random()*w,y:Math.random()*h*.7,r:1+Math.random()*3,a:.1+Math.random()*.4,ph:Math.random()*6}));
+    }
+    function draw(time){
+      const T=time*.001; ctx.clearRect(0,0,w,h);
+      if(opts.bg){ const g=ctx.createLinearGradient(0,0,0,h); opts.bg.forEach((c,i)=>g.addColorStop(i/(opts.bg.length-1),c)); ctx.fillStyle=g; ctx.fillRect(0,0,w,h); }
+      opts.beams.forEach((b,i)=>{
+        const ang=Math.sin(T*.35+i*1.7)*.35;
+        ctx.save(); ctx.translate(w*b.x,-10); ctx.rotate(ang);
+        const g=ctx.createLinearGradient(0,0,0,h*1.1); g.addColorStop(0,b.c); g.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle=g; ctx.beginPath(); ctx.moveTo(-6,0); ctx.lineTo(6,0); ctx.lineTo(h*.28,h*1.1); ctx.lineTo(-h*.28,h*1.1); ctx.fill(); ctx.restore();
+      });
+      dots.forEach(d=>{ ctx.globalAlpha=d.a*(.6+.4*Math.sin(T+d.ph)); ctx.fillStyle=opts.dot; ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,7); ctx.fill(); });
+      ctx.globalAlpha=1; ctx.fillStyle=opts.crowd;
+      const base=h+4;
+      people.forEach(p=>{
+        const hs=opts.head*p.s, y=base-opts.body*p.s;
+        ctx.beginPath(); ctx.arc(p.x,y-hs*1.2,hs,0,7); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(p.x,base,hs*2.2,opts.body*p.s,0,Math.PI,0); ctx.fill();
+        if(p.arm){ const sway=Math.sin(T*1.2+p.ph)*hs*.5; ctx.lineWidth=hs*.7; ctx.lineCap='round'; ctx.strokeStyle=opts.crowd;
+          ctx.beginPath(); ctx.moveTo(p.x+hs*1.4,y); ctx.quadraticCurveTo(p.x+hs*2.4,y-hs*3,p.x+hs*2+sway,y-hs*5.2); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(p.x-hs*1.4,y); ctx.quadraticCurveTo(p.x-hs*2.4,y-hs*3,p.x-hs*2+sway,y-hs*5.2); ctx.stroke(); }
+      });
+      if(!reduce) requestAnimationFrame(draw);
+    }
+    size(); addEventListener('resize',size); requestAnimationFrame(draw);
+  }
+  scene(document.getElementById('stage'),{
+    bg:['#1d2c58','#121b3a','#0b1230'], spacing:46, arms:.35, head:9, body:34, dots:60, dot:'#c8d4ff', crowd:'#060a1c',
+    beams:[{x:.55,c:'rgba(150,175,255,.22)'},{x:.72,c:'rgba(232,135,63,.16)'},{x:.88,c:'rgba(150,175,255,.18)'},{x:.38,c:'rgba(150,175,255,.10)'}]
+  });
+  scene(document.getElementById('crowd'),{
+    bg:null, spacing:22, arms:.6, head:4.5, body:16, dots:24, dot:'#fff3d6', crowd:'#1a0b05',
+    beams:[{x:.3,c:'rgba(255,240,200,.35)'},{x:.7,c:'rgba(255,240,200,.3)'}]
+  });
+})();
+</script>
+
+</body>
+</html>
