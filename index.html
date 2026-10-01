@@ -153,6 +153,16 @@ section{padding-block:clamp(64px,9vw,104px)}
 .ev p{margin:0;color:var(--muted);font-size:.95rem}
 @media (max-width:560px){.events{grid-template-columns:1fr}}
 
+/* Facebook feed */
+.fb-grid{display:grid;grid-template-columns:1fr minmax(0,500px);gap:clamp(28px,5vw,64px);align-items:start}
+.fb-grid > *{min-width:0}
+.fb-live{display:flex;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.fb-live div{display:grid;line-height:1.35}
+.fb-live span:not(.dot){color:var(--muted);font-size:.93rem}
+.fb-frame{background:var(--bg-2);border-radius:6px;box-shadow:var(--shadow);overflow:hidden;min-height:640px;display:flex;justify-content:center}
+.fb-frame iframe{width:100%;max-width:500px;height:640px;display:block}
+@media (max-width:860px){.fb-grid{grid-template-columns:1fr}.fb-frame{max-width:500px;width:100%;margin:0 auto}}
+
 /* Contact */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px)}
 .contact-grid > *{min-width:0}
@@ -202,6 +212,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
       <a href="#gospel"><span class="en">New Life</span><span class="es">Nueva Vida</span></a>
       <a href="#groups"><span class="en">Cell Groups</span><span class="es">Células</span></a>
       <a href="#events"><span class="en">Events</span><span class="es">Eventos</span></a>
+      <a href="#facebook">Facebook</a>
       <a href="#contact"><span class="en">Contact</span><span class="es">Contacto</span></a>
     </div>
     <div class="lang" role="group" aria-label="Language">
@@ -221,7 +232,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
     <div class="ctas">
       <a class="btn btn-accent" href="#visit"><span class="en">I'm New Here</span><span class="es">Soy nuevo aquí</span></a>
       <a class="btn btn-outline" href="#gospel"><span class="en">God's Plan for You</span><span class="es">El plan de Dios para ti</span></a>
-      <a class="btn btn-outline" href="https://www.facebook.com/share/198dVT4Psj/" target="_blank" rel="noopener"><span class="dot" aria-hidden="true"></span><span class="en">Facebook Live · Sun 12 PM</span><span class="es">Facebook Live · Dom 12 PM</span></a>
+      <a class="btn btn-outline" href="https://www.facebook.com/florentinomonrea" target="_blank" rel="noopener"><span class="dot" aria-hidden="true"></span><span class="en">Facebook Live · Sun 12 PM</span><span class="es">Facebook Live · Dom 12 PM</span></a>
     </div>
   </div>
 </header>
@@ -239,7 +250,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
       <p class="live"><span class="dot" aria-hidden="true"></span><span class="en">Can't make it in person? Watch us on <b>Facebook Live every Sunday at 12 PM</b>.</span><span class="es">¿No puedes venir en persona? Míranos en <b>Facebook Live cada domingo a las 12 PM</b>.</span></p>
       <div class="row">
         <a class="btn btn-accent" href="https://www.google.com/maps/dir/?api=1&destination=3898+W+5535+S+Suite+4+Taylorsville+UT+84129" target="_blank" rel="noopener"><span class="en">Get Directions</span><span class="es">Cómo llegar</span> →</a>
-        <a class="link" href="https://www.facebook.com/share/198dVT4Psj/" target="_blank" rel="noopener"><span class="en">Watch on Facebook Live</span><span class="es">Ver en Facebook Live</span> →</a>
+        <a class="link" href="https://www.facebook.com/florentinomonrea" target="_blank" rel="noopener"><span class="en">Watch on Facebook Live</span><span class="es">Ver en Facebook Live</span> →</a>
       </div>
     </div>
   </div>
@@ -351,6 +362,26 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
   </div>
 </section>
 
+<section id="facebook">
+  <div class="wrap fb-grid">
+    <div>
+      <div class="sec-head" style="margin-bottom:20px">
+        <span class="eyebrow"><span class="en">Stay connected</span><span class="es">Mantente conectado</span></span>
+        <h2><span class="en">Latest From Facebook</span><span class="es">Lo último en Facebook</span></h2>
+        <p><span class="en">See our newest posts, photos and announcements. Every Sunday at 12 PM we stream our General Service on Facebook Live, so you can worship with us from anywhere.</span><span class="es">Mira nuestras publicaciones, fotos y anuncios más recientes. Cada domingo a las 12 PM transmitimos el Servicio General por Facebook Live para que adores con nosotros desde cualquier lugar.</span></p>
+      </div>
+      <div class="fb-live">
+        <span class="dot" aria-hidden="true"></span>
+        <div><b><span class="en">Facebook Live</span><span class="es">Facebook Live</span></b><span><span class="en">Every Sunday · 12:00 PM</span><span class="es">Cada domingo · 12:00 PM</span></span></div>
+      </div>
+      <a class="btn btn-accent" href="https://www.facebook.com/florentinomonrea" target="_blank" rel="noopener" style="margin-top:18px"><span class="en">Follow Us on Facebook</span><span class="es">Síguenos en Facebook</span> →</a>
+    </div>
+    <div class="fb-frame">
+      <iframe title="Sandy Apostolic Church on Facebook" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fflorentinomonrea&tabs=timeline&width=500&height=640&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" width="500" height="640" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+    </div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="wrap contact-grid">
     <div>
@@ -363,7 +394,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
         <div><span class="k"><span class="en">Phone</span><span class="es">Teléfono</span></span><a class="v" id="v-phone" href="tel:+18018099856">(801) 809-9856</a></div>
         <div><span class="k">Email</span><a class="v" id="v-email" href="mailto:sandyapostolicchurch@gmail.com">sandyapostolicchurch@gmail.com</a></div>
         <div><span class="k"><span class="en">Address</span><span class="es">Dirección</span></span><a class="v" id="v-addr" href="https://www.google.com/maps/dir/?api=1&destination=3898+W+5535+S+Suite+4+Taylorsville+UT+84129" target="_blank" rel="noopener">3898 W 5535 S, Suite 4, Taylorsville, UT 84129</a></div>
-        <div><span class="k">Facebook</span><a class="v" href="https://www.facebook.com/share/198dVT4Psj/" target="_blank" rel="noopener" style="color:var(--accent)">Sandy Apostolic Church</a></div>
+        <div><span class="k">Facebook</span><a class="v" href="https://www.facebook.com/florentinomonrea" target="_blank" rel="noopener" style="color:var(--accent)">Sandy Apostolic Church</a></div>
       </div>
     </div>
     <form class="prayer" id="prayer-form" name="prayer-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
@@ -383,7 +414,7 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
 <footer>
   <div class="wrap">
     <div style="display:flex;gap:14px;align-items:center"><img src="sac-logo.png" alt="" width="40" height="52" style="background:#fff;border-radius:6px;padding:4px"><div><b>Sandy Apostolic Church</b><br><span class="en">Apostolic Assembly of the Faith in Christ Jesus</span><span class="es">Asamblea Apostólica de la Fe en Cristo Jesús</span></div></div>
-    <div>3898 W 5535 S, Suite 4 · Taylorsville, UT 84129 · <a href="https://www.facebook.com/share/198dVT4Psj/" target="_blank" rel="noopener">Facebook</a></div>
+    <div>3898 W 5535 S, Suite 4 · Taylorsville, UT 84129 · <a href="https://www.facebook.com/florentinomonrea" target="_blank" rel="noopener">Facebook</a></div>
   </div>
 </footer>
 
