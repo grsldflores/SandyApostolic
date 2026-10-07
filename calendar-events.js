@@ -34,18 +34,29 @@
     for (var i = 0; i < parent.children.length; i++) parent.children[i].style.font = 'inherit';
     return parent;
   }
-  // "English | Español"  or  "Español / English" (Spanish first, like the church calendar)
-  function splitTitle(t) {
-    t = t || '';
-    var p = t.split(/\s+\|\s+/);
-    if (p.length > 1) return { en: p[0].trim(), es: p[1].trim() };
-    p = t.split(/\s+\/\s+/);
-    if (p.length > 1) return { es: p[0].trim(), en: p[1].trim() };
-    return { en: t.trim(), es: t.trim() };
+  // Auto-detect which half is Spanish and which is English, in any order.
+  var ES_WORDS = /\b(el|la|los|las|de|del|y|en|con|para|por|un|una|nuestra?s?|que|es|al|se|su|sus|tu|te|ven|domingo|lunes|martes|mi[eé]rcoles|jueves|viernes|s[aá]bado|servicio|iglesia|oraci[oó]n|reuni[oó]n|j[oó]venes|ni[nñ]os|damas|varones|hermanas?|convivio|alcance|actividad|escuela|dominical|matutino|todos)\b/gi;
+  var EN_WORDS = /\b(the|and|of|for|with|our|your|you|we|to|in|at|is|are|join|us|all|sunday|monday|tuesday|wednesday|thursday|friday|saturday|service|church|prayer|meeting|youth|kids|children|women|men|ladies|outreach|activity|school|morning|night|community|fellowship)\b/gi;
+  function spanishScore(s) {
+    var es = (s.match(ES_WORDS) || []).length + 2 * (s.match(/[áéíóúñ¿¡]/gi) || []).length;
+    var en = (s.match(EN_WORDS) || []).length;
+    return es - en;
   }
+  function pair(a, b) {
+    a = (a || '').trim(); b = (b || '').trim();
+    if (!b) return { en: a, es: a };
+    return spanishScore(a) >= spanishScore(b) ? { es: a, en: b } : { en: a, es: b };
+  }
+  // Titles: "Español / English", "English | Español", either order
+  function splitTitle(t) {
+    t = (t || '').trim();
+    var p = t.split(/\s+[|\/]\s+/);
+    return p.length > 1 ? pair(p[0], p.slice(1).join(' / ')) : pair(t);
+  }
+  // Descriptions: two parts separated by a line with ---, either order
   function splitDesc(d) {
     var p = (d || '').split(/\n\s*-{3,}\s*\n/);
-    return { en: (p[0] || '').trim(), es: (p[1] || p[0] || '').trim() };
+    return p.length > 1 ? pair(p[0], p.slice(1).join('\n')) : pair(p[0]);
   }
   function trim(s, n) { return s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s; }
 
