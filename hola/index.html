@@ -86,15 +86,14 @@ address svg{width:18px;height:18px;color:var(--accent);flex:none;margin-top:3px}
 
 /* Form — matches the site's contact form */
 form{display:grid;gap:4px}
-label{font:600 .85rem/1.3 var(--f-head);margin-top:10px}
+.flabel{font:600 .85rem/1.3 var(--f-head);margin-top:10px}
 input,textarea{width:100%;font:inherit;font-size:16px;color:var(--fg);background:var(--bg-2);border:1px solid transparent;border-radius:4px;padding:12px 14px}
 input:focus,textarea:focus{outline:none;border-color:var(--accent);background:#fff}
 textarea{min-height:96px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.chips input{position:absolute;opacity:0;width:1px;height:1px}
-.chips label{margin:0;padding:9px 14px;border-radius:4px;background:var(--bg-2);font:500 .9rem/1 var(--f-head);cursor:pointer;border:1px solid transparent}
-.chips input:checked + label{background:var(--accent-soft);border-color:var(--accent);color:#a9541a}
-.chips input:focus-visible + label{outline:2px solid var(--accent);outline-offset:2px}
+.chips button{margin:0;color:var(--fg);padding:9px 14px;border-radius:4px;background:var(--bg-2);font:500 .9rem/1 var(--f-head);cursor:pointer;border:1px solid transparent}
+.chips button[aria-checked="true"]{background:var(--accent-soft);border-color:var(--accent);color:#a9541a}
+.chips button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 form .btn{margin-top:14px}
 .note{font-size:.82rem;color:var(--muted);margin:8px 0 0}
 .hp{position:absolute;left:-9999px}
@@ -192,24 +191,25 @@ footer p{margin:0}
 
     <form name="hola-connect" method="POST" action="/hola/?sent=1#connect" data-netlify="true" netlify-honeypot="company" id="connectForm">
       <input type="hidden" name="form-name" value="hola-connect">
-      <input type="hidden" name="language" id="formLang" value="en">
-      <p class="hp"><label>Leave blank <input name="company" tabindex="-1" autocomplete="off"></label></p>
+      <input type="hidden" name="Language" id="formLang" value="English">
+      <p class="hp" aria-hidden="true"><input name="company" tabindex="-1" autocomplete="off"></p>
 
-      <span class="label-like" style="font:600 .85rem/1.3 var(--f-head)"><span class="en">I'd like to…</span><span class="es">Me gustaría…</span></span>
-      <div class="chips">
-        <input type="radio" name="reason" id="r1" value="Visit / I'm new" checked><label for="r1"><span class="en">Visit</span><span class="es">Visitar</span></label>
-        <input type="radio" name="reason" id="r2" value="Prayer request"><label for="r2"><span class="en">Request prayer</span><span class="es">Pedir oración</span></label>
-        <input type="radio" name="reason" id="r3" value="Talk to someone"><label for="r3"><span class="en">Talk to someone</span><span class="es">Hablar con alguien</span></label>
+      <span class="flabel" id="lbl-reason"><span class="en">I'd like to…</span><span class="es">Me gustaría…</span></span>
+      <input type="hidden" name="Reason" id="f-reason" value="Visit / I'm new">
+      <div class="chips" role="radiogroup" aria-labelledby="lbl-reason">
+        <button type="button" role="radio" aria-checked="true" data-v="Visit / I'm new"><span class="en">Visit</span><span class="es">Visitar</span></button>
+        <button type="button" role="radio" aria-checked="false" data-v="Prayer request"><span class="en">Request prayer</span><span class="es">Pedir oración</span></button>
+        <button type="button" role="radio" aria-checked="false" data-v="Talk to someone"><span class="en">Talk to someone</span><span class="es">Hablar con alguien</span></button>
       </div>
 
-      <label for="f-name"><span class="en">Your name</span><span class="es">Tu nombre</span></label>
-      <input id="f-name" name="name" autocomplete="name" required>
+      <span class="flabel" id="lbl-name"><span class="en">Your name</span><span class="es">Tu nombre</span></span>
+      <input name="Name" aria-labelledby="lbl-name" autocomplete="name" required>
 
-      <label for="f-contact"><span class="en">Phone or email</span><span class="es">Teléfono o correo</span></label>
-      <input id="f-contact" name="contact" autocomplete="tel">
+      <span class="flabel" id="lbl-contact"><span class="en">Phone or email</span><span class="es">Teléfono o correo</span></span>
+      <input name="Phone or email" aria-labelledby="lbl-contact" autocomplete="tel">
 
-      <label for="f-msg"><span class="en">Message (optional)</span><span class="es">Mensaje (opcional)</span></label>
-      <textarea id="f-msg" name="message"></textarea>
+      <span class="flabel" id="lbl-msg"><span class="en">Message (optional)</span><span class="es">Mensaje (opcional)</span></span>
+      <textarea name="Message" aria-labelledby="lbl-msg"></textarea>
 
       <button class="btn btn-accent" type="submit"><span class="en">Send</span><span class="es">Enviar</span></button>
       <p class="note"><span class="en">Only our church staff will see this.</span><span class="es">Solo el equipo de nuestra iglesia verá esto.</span></p>
@@ -236,13 +236,17 @@ footer p{margin:0}
   function setLang(l){
     root.dataset.lang=l; root.lang=l;
     document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.l===l));});
-    var fl=document.getElementById('formLang'); if(fl) fl.value=l;
+    var fl=document.getElementById('formLang'); if(fl) fl.value=(l==='es'?'Español':'English');
     try{localStorage.setItem('sac-lang',l);}catch(e){}
   }
   var saved=null; try{saved=localStorage.getItem('sac-lang');}catch(e){}
   setLang(saved==='es'||saved==='en'?saved:((navigator.language||'en').toLowerCase().indexOf('es')===0?'es':'en'));
   document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.l);});});
 
+  var reason=document.getElementById('f-reason');
+  document.querySelectorAll('.chips button').forEach(function(b,i,all){
+    b.addEventListener('click',function(){all.forEach(function(x){x.setAttribute('aria-checked',String(x===b));}); reason.value=b.dataset.v;});
+  });
   if(/[?&]sent=1/.test(location.search)){
     document.getElementById('connectForm').style.display='none';
     document.getElementById('thanks').classList.add('show');
