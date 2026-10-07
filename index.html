@@ -92,6 +92,18 @@ section{padding-block:clamp(64px,9vw,104px)}
 .hero .lede{max-width:52ch;color:var(--on-navy-muted);margin:0}
 .hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
 .hero .script{font:600 italic 1.5rem/1 var(--f-script);color:var(--accent)}
+/* Hero emblem (church logo) */
+.hero .wrap.hero-grid{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:center;justify-items:stretch;gap:clamp(28px,5vw,72px)}
+.hero-text{display:grid;gap:22px;justify-items:start;min-width:0}
+.hero-emblem{position:relative;display:grid;place-items:center;min-width:0}
+.hero-emblem::before{content:"";position:absolute;width:115%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(150,175,255,.22) 0%,rgba(232,135,63,.10) 38%,rgba(13,21,48,0) 68%)}
+.hero-emblem img{position:relative;width:min(100%,360px);height:auto;filter:drop-shadow(0 22px 40px rgba(0,0,0,.45))}
+@media (max-width:860px){
+  .hero .wrap.hero-grid{grid-template-columns:1fr}
+  .hero-emblem{order:-1;justify-self:start}
+  .hero-emblem::before{width:180%}
+  .hero-emblem img{width:120px}
+}
 
 /* Floating service card */
 .float{position:relative;z-index:2;margin-top:clamp(-110px,-11vw,-80px)}
@@ -249,7 +261,8 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
 
 <header class="hero" id="top">
   <canvas id="stage" aria-hidden="true"></canvas>
-  <div class="wrap">
+  <div class="wrap hero-grid">
+   <div class="hero-text">
     <span class="eyebrow"><span class="en">Jesus loves you · A growing bilingual church</span><span class="es">Jesús te ama · Una iglesia bilingüe en crecimiento</span></span>
     <h1><span class="en">Welcome To Sandy Apostolic Church</span><span class="es">Bienvenido a Sandy Apostolic Church</span></h1>
     <p class="lede"><span class="en">Whatever you're carrying, you don't have to carry it alone. We're a Spirit-filled family rooted in the Apostolic faith, and there's a seat saved for you this Sunday.</span><span class="es">Lo que sea que estés cargando, no tienes que cargarlo solo. Somos una familia llena del Espíritu Santo, arraigada en la fe Apostólica, y hay un lugar apartado para ti este domingo.</span></p>
@@ -258,6 +271,10 @@ footer b{color:#fff;font:600 1rem/1.4 var(--f-head);letter-spacing:.06em;text-tr
       <a class="btn btn-outline" href="#gospel"><span class="en">God's Plan for You</span><span class="es">El plan de Dios para ti</span></a>
       <a class="btn btn-outline" href="https://www.facebook.com/florentinomonrea" target="_blank" rel="noopener"><span class="dot" aria-hidden="true"></span><span class="en">Facebook Live · Sun 12 PM</span><span class="es">Facebook Live · Dom 12 PM</span></a>
     </div>
+   </div>
+   <div class="hero-emblem">
+     <img src="/sac-logo-lg.png" width="600" height="778" alt="Apostolic Assembly of the Faith in Christ Jesus emblem">
+   </div>
   </div>
 </header>
 
